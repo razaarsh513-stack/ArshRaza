@@ -184,60 +184,260 @@
             margin-bottom: 5px;
         }
 
+        /* QUIZ STYLES */
+        .quiz-wrapper {
+            background: linear-gradient(135deg, #f5f7fa 0%, #f0f3ff 100%);
+            padding: 40px 0;
+        }
+
         .quiz-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .quiz-header h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .quiz-header p {
+            color: #666;
+            font-size: 1em;
+        }
+
+        .quiz-progress {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.9em;
+            color: #666;
+            text-align: right;
+        }
+
+        .question-card {
             background: white;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .question {
             margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            animation: slideIn 0.3s ease;
         }
 
-        .question h4 {
-            color: #667eea;
-            margin-bottom: 15px;
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .question-text {
             font-size: 1.1em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 500;
         }
 
-        .option {
-            background: #f9f9f9;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
+        .options-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-item {
+            position: relative;
+        }
+
+        .option-item input[type="radio"] {
+            position: absolute;
+            opacity: 0;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
         }
 
-        .option:hover {
-            background: #e8eaf6;
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: #f8f9fb;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-item input[type="radio"]:checked + .option-label {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-color: #667eea;
+            font-weight: 500;
+        }
+
+        .option-label:hover {
+            background: #f0f2f8;
             border-color: #667eea;
         }
 
-        .option input {
-            margin-right: 10px;
-            cursor: pointer;
+        .option-radio {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
         }
 
-        .score {
+        .option-item input[type="radio"]:checked + .option-label .option-radio {
+            border-color: #667eea;
+            background: #667eea;
+        }
+
+        .option-radio::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .option-item input[type="radio"]:checked + .option-label .option-radio::after {
+            opacity: 1;
+        }
+
+        .option-text {
+            color: #333;
+            flex: 1;
+        }
+
+        .quiz-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .submit-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            margin-top: 20px;
-            display: none;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
-        .score.show {
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .reset-btn {
+            background: white;
+            color: #667eea;
+            padding: 14px 40px;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: #f0f3ff;
+            transform: translateY(-2px);
+        }
+
+        .score-container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        .score-container.show {
             display: block;
         }
 
-        .score h3 {
-            font-size: 2em;
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+            font-weight: bold;
+        }
+
+        .score-title {
+            font-size: 1.5em;
+            color: #333;
             margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .score-message {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
 
         footer {
@@ -341,22 +541,22 @@
 
             <div class="lesson-item">
                 <h4>📖 Lesson 1: Introduction to Colonial Rule</h4>
-                <p>The colonial period in India began with the arrival of European traders in the 16th century. Initially, they came for trade, but gradually established political control. The British East India Company played a crucial role in establishing British dominance in India through military conquests and political alliances.</p>
+                <p>The colonial period in India began with the arrival of European traders in the 16th century. Initially, they came for trade, but gradually established political control. The British East India Company played a crucial role in this expansion.</p>
             </div>
 
             <div class="lesson-item">
                 <h4>📖 Lesson 2: The British East India Company</h4>
-                <p>Founded in 1600, the British East India Company started as a trading organization but became a political power. It controlled vast territories, maintained armies, and made laws. The company's policies had a significant impact on Indian economy and society, leading to the extraction of resources and wealth.</p>
+                <p>Founded in 1600, the British East India Company started as a trading organization but became a political power. It controlled vast territories, maintained armies, and made laws. Eventually, the Crown took direct control of India.</p>
             </div>
 
             <div class="lesson-item">
                 <h4>📖 Lesson 3: Resistance and Rebellion</h4>
-                <p>Indians resisted colonial rule through various means - from armed rebellions to civil disobedience. The 1857 Revolt was a major uprising against British rule. Later, the Indian National Congress was formed to pursue independence through constitutional means, eventually leading to India's freedom in 1947.</p>
+                <p>Indians resisted colonial rule through various means - from armed rebellions to civil disobedience. The 1857 Revolt was a major uprising against British rule. Later, the Indian National Congress led the struggle for independence.</p>
             </div>
 
             <div class="lesson-item">
                 <h4>📖 Lesson 4: Impact on Indian Society</h4>
-                <p>Colonial rule brought significant changes to Indian society. It introduced new educational systems, administrative structures, and legal frameworks. However, it also disrupted traditional industries, increased poverty, and created social divisions. The colonial period left a lasting impact on Indian culture, economy, and politics.</p>
+                <p>Colonial rule brought significant changes to Indian society. It introduced new educational systems, administrative structures, and legal frameworks. However, it also disrupted traditional systems and exploited Indian resources.</p>
             </div>
         </div>
 
@@ -454,95 +654,214 @@
 
         <!-- QUIZ TAB -->
         <div id="quiz" class="content">
-            <h2 class="section-title">🎯 Test Your Knowledge</h2>
+            <div class="quiz-wrapper">
+                <div class="quiz-container">
+                    <div class="quiz-header">
+                        <h2>🎯 Test Your Knowledge</h2>
+                        <p>Answer all questions and click submit to see your score</p>
+                    </div>
 
-            <div class="quiz-container">
-                <div class="question">
-                    <h4>1. In which year was the Battle of Plassey fought?</h4>
-                    <label class="option">
-                        <input type="radio" name="q1" value="a"> A) 1750
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q1" value="b"> B) 1757
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q1" value="c"> C) 1764
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q1" value="d"> D) 1770
-                    </label>
-                </div>
+                    <div id="quizForm">
+                        <div class="quiz-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <div class="progress-text"><span id="answered">0</span>/5 Answered</div>
+                        </div>
 
-                <div class="question">
-                    <h4>2. Who was known as the "Tiger of Mysore"?</h4>
-                    <label class="option">
-                        <input type="radio" name="q2" value="a"> A) Nana Sahib
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q2" value="b"> B) Tipu Sultan
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q2" value="c"> C) Maharaja Ranjit Singh
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q2" value="d"> D) Robert Clive
-                    </label>
-                </div>
+                        <!-- Question 1 -->
+                        <div class="question-card">
+                            <div class="question-number">1</div>
+                            <div class="question-text">In which year was the Battle of Plassey fought?</div>
+                            <div class="options-group">
+                                <div class="option-item">
+                                    <input type="radio" id="q1a" name="q1" value="a">
+                                    <label for="q1a" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">1750</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="q1b" name="q1" value="b">
+                                    <label for="q1b" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">1757</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="q1c" name="q1" value="c">
+                                    <label for="q1c" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">1764</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="q1d" name="q1" value="d">
+                                    <label for="q1d" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">1770</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="question">
-                    <h4>3. In which year was the Indian National Congress founded?</h4>
-                    <label class="option">
-                        <input type="radio" name="q3" value="a"> A) 1885
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q3" value="b"> B) 1905
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q3" value="c"> C) 1915
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q3" value="d"> D) 1925
-                    </label>
-                </div>
+                        <!-- Question 2 -->
+                        <div class="question-card">
+                            <div class="question-number">2</div>
+                            <div class="question-text">Who was known as the "Tiger of Mysore"?</div>
+                            <div class="options-group">
+                                <div class="option-item">
+                                    <input type="radio" id="q2a" name="q2" value="a">
+                                    <label for="q2a" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">Nana Sahib</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="q2b" name="q2" value="b">
+                                    <label for="q2b" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">Tipu Sultan</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="q2c" name="q2" value="c">
+                                    <label for="q2c" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">Maharaja Ranjit Singh</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="q2d" name="q2" value="d">
+                                    <label for="q2d" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">Robert Clive</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="question">
-                    <h4>4. Who was the first Governor-General of India?</h4>
-                    <label class="option">
-                        <input type="radio" name="q4" value="a"> A) Robert Clive
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q4" value="b"> B) Warren Hastings
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q4" value="c"> C) Lord Curzon
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q4" value="d"> D) Lord Mountbatten
-                    </label>
-                </div>
+                        <!-- Question 3 -->
+                        <div class="question-card">
+                            <div class="question-number">3</div>
+                            <div class="question-text">In which year was the Indian National Congress founded?</div>
+                            <div class="options-group">
+                                <div class="option-item">
+                                    <input type="radio" id="q3a" name="q3" value="a">
+                                    <label for="q3a" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">1885</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="q3b" name="q3" value="b">
+                                    <label for="q3b" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">1905</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="q3c" name="q3" value="c">
+                                    <label for="q3c" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">1915</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="q3d" name="q3" value="d">
+                                    <label for="q3d" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">1925</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="question">
-                    <h4>5. Who was the Queen of Jhansi who led a rebellion in 1857?</h4>
-                    <label class="option">
-                        <input type="radio" name="q5" value="a"> A) Rani Lakshmi Bai
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q5" value="b"> B) Rani Padmavati
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q5" value="c"> C) Rani Durgavati
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q5" value="d"> D) Rani Chenamma
-                    </label>
-                </div>
+                        <!-- Question 4 -->
+                        <div class="question-card">
+                            <div class="question-number">4</div>
+                            <div class="question-text">Who was the first Governor-General of India?</div>
+                            <div class="options-group">
+                                <div class="option-item">
+                                    <input type="radio" id="q4a" name="q4" value="a">
+                                    <label for="q4a" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">Robert Clive</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="q4b" name="q4" value="b">
+                                    <label for="q4b" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">Warren Hastings</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="q4c" name="q4" value="c">
+                                    <label for="q4c" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">Lord Curzon</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="q4d" name="q4" value="d">
+                                    <label for="q4d" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">Lord Mountbatten</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
 
-                <button class="cta-button" onclick="submitQuiz()">Submit Quiz</button>
+                        <!-- Question 5 -->
+                        <div class="question-card">
+                            <div class="question-number">5</div>
+                            <div class="question-text">Who was the Queen of Jhansi who led a rebellion in 1857?</div>
+                            <div class="options-group">
+                                <div class="option-item">
+                                    <input type="radio" id="q5a" name="q5" value="a">
+                                    <label for="q5a" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">Rani Lakshmi Bai</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="q5b" name="q5" value="b">
+                                    <label for="q5b" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">Rani Padmavati</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="q5c" name="q5" value="c">
+                                    <label for="q5c" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">Rani Durgavati</span>
+                                    </label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="q5d" name="q5" value="d">
+                                    <label for="q5d" class="option-label">
+                                        <span class="option-radio"></span>
+                                        <span class="option-text">Rani Chenamma</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
 
-                <div id="scoreDiv" class="score">
-                    <h3 id="scoreText"></h3>
-                    <p id="scoreMessage"></p>
-                    <button class="cta-button" onclick="resetQuiz()" style="background: white; color: #667eea; margin-top: 15px;">Take Quiz Again</button>
+                        <div class="quiz-actions">
+                            <button class="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
+                            <button class="reset-btn" onclick="resetQuiz()">Clear Answers</button>
+                        </div>
+                    </div>
+
+                    <!-- Score Container -->
+                    <div id="scoreContainer" class="score-container">
+                        <div class="score-circle" id="scoreCircle">0/5</div>
+                        <div class="score-title">Quiz Complete!</div>
+                        <div class="score-message" id="scoreMessage"></div>
+                        <button class="submit-btn" onclick="resetQuiz()">Try Again</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -554,24 +873,38 @@
 
     <script>
         function showTab(tabName) {
-            // Hide all content
             const contents = document.querySelectorAll('.content');
             contents.forEach(content => {
                 content.classList.remove('active');
             });
 
-            // Remove active class from all buttons
             const buttons = document.querySelectorAll('.nav-tabs button');
             buttons.forEach(button => {
                 button.classList.remove('active');
             });
 
-            // Show selected tab
             document.getElementById(tabName).classList.add('active');
-
-            // Add active class to clicked button
             event.target.classList.add('active');
         }
+
+        // Update progress tracker
+        function updateProgress() {
+            let answered = 0;
+            for (let i = 1; i <= 5; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected) answered++;
+            }
+            document.getElementById('answered').textContent = answered;
+            document.getElementById('progressFill').style.width = (answered / 5) * 100 + '%';
+        }
+
+        // Add event listeners to all radio buttons
+        document.addEventListener('DOMContentLoaded', () => {
+            const radios = document.querySelectorAll('input[type="radio"]');
+            radios.forEach(radio => {
+                radio.addEventListener('change', updateProgress);
+            });
+        });
 
         function submitQuiz() {
             const answers = {
@@ -590,25 +923,26 @@
                 }
             }
 
-            const scoreDiv = document.getElementById('scoreDiv');
-            const scoreText = document.getElementById('scoreText');
+            const quizForm = document.getElementById('quizForm');
+            const scoreContainer = document.getElementById('scoreContainer');
+            const scoreCircle = document.getElementById('scoreCircle');
             const scoreMessage = document.getElementById('scoreMessage');
 
-            scoreText.textContent = `Score: ${score}/5`;
+            quizForm.style.display = 'none';
+            scoreContainer.classList.add('show');
+            scoreCircle.textContent = `${score}/5`;
 
             if (score === 5) {
-                scoreMessage.textContent = '🎉 Perfect! You have mastered the Colonial Era!';
-            } else if (score >= 4) {
+                scoreMessage.textContent = '🎉 Perfect! You have mastered the Colonial Era! Outstanding performance!';
+            } else if (score === 4) {
                 scoreMessage.textContent = '🌟 Excellent! You have a strong understanding of the Colonial Era!';
-            } else if (score >= 3) {
-                scoreMessage.textContent = '👍 Good! You understand most topics. Review the lessons to improve!';
-            } else if (score >= 2) {
+            } else if (score === 3) {
+                scoreMessage.textContent = '👍 Good! You understand most topics. Review the lessons to improve further!';
+            } else if (score === 2) {
                 scoreMessage.textContent = '📚 Keep Learning! Review the lessons and try again!';
             } else {
                 scoreMessage.textContent = '💪 Don\'t give up! Go through the lessons carefully and try again!';
             }
-
-            scoreDiv.classList.add('show');
         }
 
         function resetQuiz() {
@@ -616,7 +950,9 @@
             radios.forEach(radio => {
                 radio.checked = false;
             });
-            document.getElementById('scoreDiv').classList.remove('show');
+            document.getElementById('quizForm').style.display = 'block';
+            document.getElementById('scoreContainer').classList.remove('show');
+            updateProgress();
         }
     </script>
 </body>
