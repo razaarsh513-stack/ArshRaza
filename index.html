@@ -15,6 +15,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
+            background: #f5f5f5;
         }
 
         header {
@@ -39,6 +40,55 @@
             max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-tabs button {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs button.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .nav-tabs button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .features {
@@ -82,14 +132,112 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 12px 30px;
+            border: none;
             border-radius: 25px;
             text-decoration: none;
             margin-top: 20px;
+            cursor: pointer;
             transition: opacity 0.3s ease;
+            font-size: 1em;
         }
 
         .cta-button:hover {
             opacity: 0.9;
+        }
+
+        .lesson-item {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .lesson-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .lesson-item p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item .year {
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .quiz-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 30px;
+        }
+
+        .question h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .option {
+            background: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background: #e8eaf6;
+            border-color: #667eea;
+        }
+
+        .option input {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .score {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .score.show {
+            display: block;
+        }
+
+        .score h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
         }
 
         footer {
@@ -108,6 +256,30 @@
             border-bottom: 3px solid #667eea;
             padding-bottom: 15px;
         }
+
+        .figure-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .figure-card .icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .figure-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .figure-card p {
+            color: #666;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -117,7 +289,16 @@
     </header>
 
     <main>
-        <section>
+        <div class="nav-tabs">
+            <button class="active" onclick="showTab('home')">Home</button>
+            <button onclick="showTab('lessons')">Lessons</button>
+            <button onclick="showTab('figures')">Key Figures</button>
+            <button onclick="showTab('timeline')">Timeline</button>
+            <button onclick="showTab('quiz')">Quiz</button>
+        </div>
+
+        <!-- HOME TAB -->
+        <div id="home" class="content active">
             <h2 class="section-title">Welcome to Your Learning Journey</h2>
             <p style="text-align: center; color: #666; font-size: 1.1em; margin-bottom: 40px;">
                 Explore the fascinating world of the Colonial Era through interactive lessons, detailed topics, and engaging content.
@@ -128,55 +309,315 @@
                     <div class="icon">📚</div>
                     <h3>Comprehensive Lessons</h3>
                     <p>Deep dive into the colonial period with well-structured lessons covering all important aspects and events.</p>
-                    <a href="#" class="cta-button">Explore Lessons</a>
-                </div>
-
-                <div class="feature-card">
-                    <div class="icon">🗺️</div>
-                    <h3>Interactive Maps</h3>
-                    <p>Visualize the colonial territories, trade routes, and important locations with interactive geographical maps.</p>
-                    <a href="#" class="cta-button">View Maps</a>
+                    <button class="cta-button" onclick="showTab('lessons')">Explore Lessons</button>
                 </div>
 
                 <div class="feature-card">
                     <div class="icon">👥</div>
                     <h3>Key Figures</h3>
                     <p>Learn about the important historical figures who shaped the colonial era and their contributions.</p>
-                    <a href="#" class="cta-button">Meet Them</a>
+                    <button class="cta-button" onclick="showTab('figures')">Meet Them</button>
                 </div>
 
                 <div class="feature-card">
                     <div class="icon">⚔️</div>
                     <h3>Historical Events</h3>
                     <p>Timeline of major events, battles, and turning points that defined the colonial period in India.</p>
-                    <a href="#" class="cta-button">See Timeline</a>
-                </div>
-
-                <div class="feature-card">
-                    <div class="icon">📖</div>
-                    <h3>Primary Sources</h3>
-                    <p>Access original documents, letters, and historical texts from the colonial era for authentic learning.</p>
-                    <a href="#" class="cta-button">Read Sources</a>
+                    <button class="cta-button" onclick="showTab('timeline')">See Timeline</button>
                 </div>
 
                 <div class="feature-card">
                     <div class="icon">🎯</div>
                     <h3>Quiz & Tests</h3>
                     <p>Test your knowledge with interactive quizzes and mock exams to prepare for your NCERT Class 8 exams.</p>
-                    <a href="#" class="cta-button">Take Quiz</a>
+                    <button class="cta-button" onclick="showTab('quiz')">Take Quiz</button>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section style="margin-top: 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 10px; color: white; text-align: center;">
-            <h2>Ready to Master the Colonial Era?</h2>
-            <p style="margin-top: 15px; font-size: 1.1em;">Start learning today and excel in your NCERT Class 8 History exams!</p>
-            <a href="#" class="cta-button" style="background: white; color: #667eea; margin-top: 25px;">Get Started Now</a>
-        </section>
+        <!-- LESSONS TAB -->
+        <div id="lessons" class="content">
+            <h2 class="section-title">📚 Comprehensive Lessons</h2>
+
+            <div class="lesson-item">
+                <h4>📖 Lesson 1: Introduction to Colonial Rule</h4>
+                <p>The colonial period in India began with the arrival of European traders in the 16th century. Initially, they came for trade, but gradually established political control. The British East India Company played a crucial role in establishing British dominance in India through military conquests and political alliances.</p>
+            </div>
+
+            <div class="lesson-item">
+                <h4>📖 Lesson 2: The British East India Company</h4>
+                <p>Founded in 1600, the British East India Company started as a trading organization but became a political power. It controlled vast territories, maintained armies, and made laws. The company's policies had a significant impact on Indian economy and society, leading to the extraction of resources and wealth.</p>
+            </div>
+
+            <div class="lesson-item">
+                <h4>📖 Lesson 3: Resistance and Rebellion</h4>
+                <p>Indians resisted colonial rule through various means - from armed rebellions to civil disobedience. The 1857 Revolt was a major uprising against British rule. Later, the Indian National Congress was formed to pursue independence through constitutional means, eventually leading to India's freedom in 1947.</p>
+            </div>
+
+            <div class="lesson-item">
+                <h4>📖 Lesson 4: Impact on Indian Society</h4>
+                <p>Colonial rule brought significant changes to Indian society. It introduced new educational systems, administrative structures, and legal frameworks. However, it also disrupted traditional industries, increased poverty, and created social divisions. The colonial period left a lasting impact on Indian culture, economy, and politics.</p>
+            </div>
+        </div>
+
+        <!-- KEY FIGURES TAB -->
+        <div id="figures" class="content">
+            <h2 class="section-title">👥 Key Historical Figures</h2>
+
+            <div class="features">
+                <div class="figure-card">
+                    <div class="icon">👨‍💼</div>
+                    <h4>Robert Clive</h4>
+                    <p>British military commander who established British dominance in India through the Battle of Plassey (1757). He became the first Governor of Bengal and helped consolidate British power in India.</p>
+                </div>
+
+                <div class="figure-card">
+                    <div class="icon">👨‍💼</div>
+                    <h4>Warren Hastings</h4>
+                    <p>First Governor-General of India who expanded British territories and consolidated British rule. He implemented administrative reforms and modernized the colonial governance system.</p>
+                </div>
+
+                <div class="figure-card">
+                    <div class="icon">🇮🇳</div>
+                    <h4>Tipu Sultan</h4>
+                    <p>Brave warrior and ruler of Mysore who fiercely resisted British expansion. Known as the "Tiger of Mysore," he died fighting against British forces in 1799.</p>
+                </div>
+
+                <div class="figure-card">
+                    <div class="icon">🇮🇳</div>
+                    <h4>Nana Sahib</h4>
+                    <p>Leader of the 1857 Revolt against British rule. He mobilized forces to resist colonial oppression and became a symbol of Indian resistance.</p>
+                </div>
+
+                <div class="figure-card">
+                    <div class="icon">🇮🇳</div>
+                    <h4>Maharaja Ranjit Singh</h4>
+                    <p>Sikh ruler who created a powerful kingdom in Punjab and resisted British expansion. He maintained independence and modernized his kingdom's military and administration.</p>
+                </div>
+
+                <div class="figure-card">
+                    <div class="icon">🇮🇳</div>
+                    <h4>Rani Lakshmi Bai</h4>
+                    <p>Queen of Jhansi who led a fierce rebellion against British rule during 1857 Revolt. She became an iconic figure of Indian resistance and independence struggle.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIMELINE TAB -->
+        <div id="timeline" class="content">
+            <h2 class="section-title">⚔️ Historical Timeline</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="year">1600</div>
+                    <h4>British East India Company Founded</h4>
+                    <p>The British East India Company is established and receives a charter from the English Crown to trade in Asia.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="year">1757</div>
+                    <h4>Battle of Plassey</h4>
+                    <p>Robert Clive defeats the Nawab of Bengal at Plassey, establishing British dominance in India and beginning the conquest of Indian territories.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="year">1764</div>
+                    <h4>Battle of Buxar</h4>
+                    <p>British forces defeat a coalition of Indian rulers, further consolidating British control over North India.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="year">1799</div>
+                    <h4>Death of Tipu Sultan</h4>
+                    <p>Tipu Sultan, the brave warrior of Mysore, dies fighting against British forces, ending the last major Indian resistance in South India.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="year">1857</div>
+                    <h4>The Great Revolt</h4>
+                    <p>The Indian Revolt against British rule breaks out, led by figures like Nana Sahib and Rani Lakshmi Bai. Though eventually suppressed, it shakes the foundation of British rule.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="year">1885</div>
+                    <h4>Indian National Congress Founded</h4>
+                    <p>The Indian National Congress is formed to pursue independence through constitutional means and legal reforms.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="year">1947</div>
+                    <h4>Indian Independence</h4>
+                    <p>India achieves independence from British rule on August 15, 1947, and becomes a sovereign democratic nation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUIZ TAB -->
+        <div id="quiz" class="content">
+            <h2 class="section-title">🎯 Test Your Knowledge</h2>
+
+            <div class="quiz-container">
+                <div class="question">
+                    <h4>1. In which year was the Battle of Plassey fought?</h4>
+                    <label class="option">
+                        <input type="radio" name="q1" value="a"> A) 1750
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="b"> B) 1757
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="c"> C) 1764
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="d"> D) 1770
+                    </label>
+                </div>
+
+                <div class="question">
+                    <h4>2. Who was known as the "Tiger of Mysore"?</h4>
+                    <label class="option">
+                        <input type="radio" name="q2" value="a"> A) Nana Sahib
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="b"> B) Tipu Sultan
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="c"> C) Maharaja Ranjit Singh
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="d"> D) Robert Clive
+                    </label>
+                </div>
+
+                <div class="question">
+                    <h4>3. In which year was the Indian National Congress founded?</h4>
+                    <label class="option">
+                        <input type="radio" name="q3" value="a"> A) 1885
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="b"> B) 1905
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="c"> C) 1915
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="d"> D) 1925
+                    </label>
+                </div>
+
+                <div class="question">
+                    <h4>4. Who was the first Governor-General of India?</h4>
+                    <label class="option">
+                        <input type="radio" name="q4" value="a"> A) Robert Clive
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="b"> B) Warren Hastings
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="c"> C) Lord Curzon
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="d"> D) Lord Mountbatten
+                    </label>
+                </div>
+
+                <div class="question">
+                    <h4>5. Who was the Queen of Jhansi who led a rebellion in 1857?</h4>
+                    <label class="option">
+                        <input type="radio" name="q5" value="a"> A) Rani Lakshmi Bai
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="b"> B) Rani Padmavati
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="c"> C) Rani Durgavati
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="d"> D) Rani Chenamma
+                    </label>
+                </div>
+
+                <button class="cta-button" onclick="submitQuiz()">Submit Quiz</button>
+
+                <div id="scoreDiv" class="score">
+                    <h3 id="scoreText"></h3>
+                    <p id="scoreMessage"></p>
+                    <button class="cta-button" onclick="resetQuiz()" style="background: white; color: #667eea; margin-top: 15px;">Take Quiz Again</button>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
         <p>&copy; 2026 Colonial Era Learning Portal. All rights reserved. | Designed for NCERT Class 8 Students</p>
     </footer>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all content
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.nav-tabs button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function submitQuiz() {
+            const answers = {
+                q1: 'b',
+                q2: 'b',
+                q3: 'a',
+                q4: 'b',
+                q5: 'a'
+            };
+
+            let score = 0;
+            for (let i = 1; i <= 5; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected && selected.value === answers[`q${i}`]) {
+                    score++;
+                }
+            }
+
+            const scoreDiv = document.getElementById('scoreDiv');
+            const scoreText = document.getElementById('scoreText');
+            const scoreMessage = document.getElementById('scoreMessage');
+
+            scoreText.textContent = `Score: ${score}/5`;
+
+            if (score === 5) {
+                scoreMessage.textContent = '🎉 Perfect! You have mastered the Colonial Era!';
+            } else if (score >= 4) {
+                scoreMessage.textContent = '🌟 Excellent! You have a strong understanding of the Colonial Era!';
+            } else if (score >= 3) {
+                scoreMessage.textContent = '👍 Good! You understand most topics. Review the lessons to improve!';
+            } else if (score >= 2) {
+                scoreMessage.textContent = '📚 Keep Learning! Review the lessons and try again!';
+            } else {
+                scoreMessage.textContent = '💪 Don\'t give up! Go through the lessons carefully and try again!';
+            }
+
+            scoreDiv.classList.add('show');
+        }
+
+        function resetQuiz() {
+            const radios = document.querySelectorAll('input[type="radio"]');
+            radios.forEach(radio => {
+                radio.checked = false;
+            });
+            document.getElementById('scoreDiv').classList.remove('show');
+        }
+    </script>
 </body>
 </html>
