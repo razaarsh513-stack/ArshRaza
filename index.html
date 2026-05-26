@@ -248,6 +248,11 @@
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             animation: slideIn 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        .question-card.answered {
+            opacity: 0.7;
         }
 
         @keyframes slideIn {
@@ -330,6 +335,7 @@
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
+            min-width: 18px;
         }
 
         .option-item input[type="radio"]:checked + .option-label .option-radio {
@@ -354,6 +360,51 @@
         .option-text {
             color: #333;
             flex: 1;
+        }
+
+        /* FEEDBACK STYLES */
+        .feedback-badge {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .feedback-correct {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .feedback-wrong {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .option-correct {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%) !important;
+            border-color: #28a745 !important;
+        }
+
+        .option-correct .option-radio {
+            border-color: #28a745 !important;
+            background: #28a745 !important;
+        }
+
+        .option-wrong {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%) !important;
+            border-color: #dc3545 !important;
+        }
+
+        .option-wrong .option-radio {
+            border-color: #dc3545 !important;
+            background: #dc3545 !important;
+        }
+
+        .option-icon {
+            margin-left: 8px;
+            font-size: 1.1em;
         }
 
         .quiz-actions {
@@ -658,7 +709,7 @@
                 <div class="quiz-container">
                     <div class="quiz-header">
                         <h2>🎯 Test Your Knowledge</h2>
-                        <p>Answer all questions and click submit to see your score</p>
+                        <p>Select an answer to see if it's correct or incorrect</p>
                     </div>
 
                     <div id="quizForm">
@@ -670,180 +721,215 @@
                         </div>
 
                         <!-- Question 1 -->
-                        <div class="question-card">
+                        <div class="question-card" id="card1">
                             <div class="question-number">1</div>
-                            <div class="question-text">In which year was the Battle of Plassey fought?</div>
+                            <div class="question-text">
+                                In which year was the Battle of Plassey fought?
+                                <span class="feedback-badge" id="feedback1" style="display:none;"></span>
+                            </div>
                             <div class="options-group">
                                 <div class="option-item">
-                                    <input type="radio" id="q1a" name="q1" value="a">
+                                    <input type="radio" id="q1a" name="q1" value="a" onchange="checkAnswer(1, 'a')">
                                     <label for="q1a" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">1750</span>
+                                        <span class="option-icon" id="icon1a"></span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="q1b" name="q1" value="b">
+                                    <input type="radio" id="q1b" name="q1" value="b" onchange="checkAnswer(1, 'b')">
                                     <label for="q1b" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">1757</span>
+                                        <span class="option-icon" id="icon1b"></span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="q1c" name="q1" value="c">
+                                    <input type="radio" id="q1c" name="q1" value="c" onchange="checkAnswer(1, 'c')">
                                     <label for="q1c" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">1764</span>
+                                        <span class="option-icon" id="icon1c"></span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="q1d" name="q1" value="d">
+                                    <input type="radio" id="q1d" name="q1" value="d" onchange="checkAnswer(1, 'd')">
                                     <label for="q1d" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">1770</span>
+                                        <span class="option-icon" id="icon1d"></span>
                                     </label>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Question 2 -->
-                        <div class="question-card">
+                        <div class="question-card" id="card2">
                             <div class="question-number">2</div>
-                            <div class="question-text">Who was known as the "Tiger of Mysore"?</div>
+                            <div class="question-text">
+                                Who was known as the "Tiger of Mysore"?
+                                <span class="feedback-badge" id="feedback2" style="display:none;"></span>
+                            </div>
                             <div class="options-group">
                                 <div class="option-item">
-                                    <input type="radio" id="q2a" name="q2" value="a">
+                                    <input type="radio" id="q2a" name="q2" value="a" onchange="checkAnswer(2, 'a')">
                                     <label for="q2a" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">Nana Sahib</span>
+                                        <span class="option-icon" id="icon2a"></span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="q2b" name="q2" value="b">
+                                    <input type="radio" id="q2b" name="q2" value="b" onchange="checkAnswer(2, 'b')">
                                     <label for="q2b" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">Tipu Sultan</span>
+                                        <span class="option-icon" id="icon2b"></span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="q2c" name="q2" value="c">
+                                    <input type="radio" id="q2c" name="q2" value="c" onchange="checkAnswer(2, 'c')">
                                     <label for="q2c" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">Maharaja Ranjit Singh</span>
+                                        <span class="option-icon" id="icon2c"></span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="q2d" name="q2" value="d">
+                                    <input type="radio" id="q2d" name="q2" value="d" onchange="checkAnswer(2, 'd')">
                                     <label for="q2d" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">Robert Clive</span>
+                                        <span class="option-icon" id="icon2d"></span>
                                     </label>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Question 3 -->
-                        <div class="question-card">
+                        <div class="question-card" id="card3">
                             <div class="question-number">3</div>
-                            <div class="question-text">In which year was the Indian National Congress founded?</div>
+                            <div class="question-text">
+                                In which year was the Indian National Congress founded?
+                                <span class="feedback-badge" id="feedback3" style="display:none;"></span>
+                            </div>
                             <div class="options-group">
                                 <div class="option-item">
-                                    <input type="radio" id="q3a" name="q3" value="a">
+                                    <input type="radio" id="q3a" name="q3" value="a" onchange="checkAnswer(3, 'a')">
                                     <label for="q3a" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">1885</span>
+                                        <span class="option-icon" id="icon3a"></span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="q3b" name="q3" value="b">
+                                    <input type="radio" id="q3b" name="q3" value="b" onchange="checkAnswer(3, 'b')">
                                     <label for="q3b" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">1905</span>
+                                        <span class="option-icon" id="icon3b"></span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="q3c" name="q3" value="c">
+                                    <input type="radio" id="q3c" name="q3" value="c" onchange="checkAnswer(3, 'c')">
                                     <label for="q3c" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">1915</span>
+                                        <span class="option-icon" id="icon3c"></span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="q3d" name="q3" value="d">
+                                    <input type="radio" id="q3d" name="q3" value="d" onchange="checkAnswer(3, 'd')">
                                     <label for="q3d" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">1925</span>
+                                        <span class="option-icon" id="icon3d"></span>
                                     </label>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Question 4 -->
-                        <div class="question-card">
+                        <div class="question-card" id="card4">
                             <div class="question-number">4</div>
-                            <div class="question-text">Who was the first Governor-General of India?</div>
+                            <div class="question-text">
+                                Who was the first Governor-General of India?
+                                <span class="feedback-badge" id="feedback4" style="display:none;"></span>
+                            </div>
                             <div class="options-group">
                                 <div class="option-item">
-                                    <input type="radio" id="q4a" name="q4" value="a">
+                                    <input type="radio" id="q4a" name="q4" value="a" onchange="checkAnswer(4, 'a')">
                                     <label for="q4a" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">Robert Clive</span>
+                                        <span class="option-icon" id="icon4a"></span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="q4b" name="q4" value="b">
+                                    <input type="radio" id="q4b" name="q4" value="b" onchange="checkAnswer(4, 'b')">
                                     <label for="q4b" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">Warren Hastings</span>
+                                        <span class="option-icon" id="icon4b"></span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="q4c" name="q4" value="c">
+                                    <input type="radio" id="q4c" name="q4" value="c" onchange="checkAnswer(4, 'c')">
                                     <label for="q4c" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">Lord Curzon</span>
+                                        <span class="option-icon" id="icon4c"></span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="q4d" name="q4" value="d">
+                                    <input type="radio" id="q4d" name="q4" value="d" onchange="checkAnswer(4, 'd')">
                                     <label for="q4d" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">Lord Mountbatten</span>
+                                        <span class="option-icon" id="icon4d"></span>
                                     </label>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Question 5 -->
-                        <div class="question-card">
+                        <div class="question-card" id="card5">
                             <div class="question-number">5</div>
-                            <div class="question-text">Who was the Queen of Jhansi who led a rebellion in 1857?</div>
+                            <div class="question-text">
+                                Who was the Queen of Jhansi who led a rebellion in 1857?
+                                <span class="feedback-badge" id="feedback5" style="display:none;"></span>
+                            </div>
                             <div class="options-group">
                                 <div class="option-item">
-                                    <input type="radio" id="q5a" name="q5" value="a">
+                                    <input type="radio" id="q5a" name="q5" value="a" onchange="checkAnswer(5, 'a')">
                                     <label for="q5a" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">Rani Lakshmi Bai</span>
+                                        <span class="option-icon" id="icon5a"></span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="q5b" name="q5" value="b">
+                                    <input type="radio" id="q5b" name="q5" value="b" onchange="checkAnswer(5, 'b')">
                                     <label for="q5b" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">Rani Padmavati</span>
+                                        <span class="option-icon" id="icon5b"></span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="q5c" name="q5" value="c">
+                                    <input type="radio" id="q5c" name="q5" value="c" onchange="checkAnswer(5, 'c')">
                                     <label for="q5c" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">Rani Durgavati</span>
+                                        <span class="option-icon" id="icon5c"></span>
                                     </label>
                                 </div>
                                 <div class="option-item">
-                                    <input type="radio" id="q5d" name="q5" value="d">
+                                    <input type="radio" id="q5d" name="q5" value="d" onchange="checkAnswer(5, 'd')">
                                     <label for="q5d" class="option-label">
                                         <span class="option-radio"></span>
                                         <span class="option-text">Rani Chenamma</span>
+                                        <span class="option-icon" id="icon5d"></span>
                                     </label>
                                 </div>
                             </div>
@@ -872,6 +958,14 @@
     </footer>
 
     <script>
+        const answers = {
+            q1: 'b',
+            q2: 'b',
+            q3: 'a',
+            q4: 'b',
+            q5: 'a'
+        };
+
         function showTab(tabName) {
             const contents = document.querySelectorAll('.content');
             contents.forEach(content => {
@@ -887,7 +981,45 @@
             event.target.classList.add('active');
         }
 
-        // Update progress tracker
+        function checkAnswer(questionNum, selectedValue) {
+            const correctAnswer = answers[`q${questionNum}`];
+            const isCorrect = selectedValue === correctAnswer;
+            
+            // Remove previous styling
+            for (let option of ['a', 'b', 'c', 'd']) {
+                const label = document.querySelector(`label[for="q${questionNum}${option}"]`);
+                const icon = document.getElementById(`icon${questionNum}${option}`);
+                label.classList.remove('option-correct', 'option-wrong');
+                icon.textContent = '';
+            }
+
+            // Add feedback
+            const selectedLabel = document.querySelector(`label[for="q${questionNum}${selectedValue}"]`);
+            const selectedIcon = document.getElementById(`icon${questionNum}${selectedValue}`);
+            const feedbackBadge = document.getElementById(`feedback${questionNum}`);
+
+            if (isCorrect) {
+                selectedLabel.classList.add('option-correct');
+                selectedIcon.textContent = '✓';
+                feedbackBadge.textContent = '✓ Correct!';
+                feedbackBadge.className = 'feedback-badge feedback-correct';
+            } else {
+                selectedLabel.classList.add('option-wrong');
+                selectedIcon.textContent = '✗';
+                feedbackBadge.textContent = '✗ Wrong!';
+                feedbackBadge.className = 'feedback-badge feedback-wrong';
+
+                // Show correct answer
+                const correctLabel = document.querySelector(`label[for="q${questionNum}${correctAnswer}"]`);
+                const correctIcon = document.getElementById(`icon${questionNum}${correctAnswer}`);
+                correctLabel.classList.add('option-correct');
+                correctIcon.textContent = '✓';
+            }
+
+            feedbackBadge.style.display = 'inline-block';
+            updateProgress();
+        }
+
         function updateProgress() {
             let answered = 0;
             for (let i = 1; i <= 5; i++) {
@@ -898,7 +1030,6 @@
             document.getElementById('progressFill').style.width = (answered / 5) * 100 + '%';
         }
 
-        // Add event listeners to all radio buttons
         document.addEventListener('DOMContentLoaded', () => {
             const radios = document.querySelectorAll('input[type="radio"]');
             radios.forEach(radio => {
@@ -907,14 +1038,6 @@
         });
 
         function submitQuiz() {
-            const answers = {
-                q1: 'b',
-                q2: 'b',
-                q3: 'a',
-                q4: 'b',
-                q5: 'a'
-            };
-
             let score = 0;
             for (let i = 1; i <= 5; i++) {
                 const selected = document.querySelector(`input[name="q${i}"]:checked`);
@@ -950,6 +1073,19 @@
             radios.forEach(radio => {
                 radio.checked = false;
             });
+
+            // Clear all feedback
+            for (let i = 1; i <= 5; i++) {
+                for (let option of ['a', 'b', 'c', 'd']) {
+                    const label = document.querySelector(`label[for="q${i}${option}"]`);
+                    const icon = document.getElementById(`icon${i}${option}`);
+                    label.classList.remove('option-correct', 'option-wrong');
+                    icon.textContent = '';
+                }
+                const feedbackBadge = document.getElementById(`feedback${i}`);
+                feedbackBadge.style.display = 'none';
+            }
+
             document.getElementById('quizForm').style.display = 'block';
             document.getElementById('scoreContainer').classList.remove('show');
             updateProgress();
